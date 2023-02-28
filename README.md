@@ -6,7 +6,7 @@ Grâce à notre site web permet de bien gérer l'activité économique et financ
 
 **Comptable:**
 
-- En tant que comptable, je peux m'édentifier (Login-forgetPassword-ResetPassword).Bas du formulaire
+- En tant que comptable, je peux m'édentifier (Login-forgetPassword-ResetPassword)
 - En tant que comptable, je peux voir,Ajouter,Supprimer et modifier les employés.
 - En tant que comptable, je peux calculer le bulletin de paie.
 - En tant que comptable, je peux calculer chiffre d’affaires d'entreprise
