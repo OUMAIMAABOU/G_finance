@@ -44,6 +44,6 @@ module.exports = gql`
       siege_social: String!
       matricule: String! # role: ID!
     ): String
-    deleteEmployer(id: String!): Boolean
+    deleteEmployer(id: ObjectID!): Boolean
   }
 `;

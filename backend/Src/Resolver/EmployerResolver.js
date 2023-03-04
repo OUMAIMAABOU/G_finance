@@ -74,21 +74,17 @@ module.exports = {
           );
         return "The Employe was created successfully";
       } catch (error) {
-        throw new Error(e);
+        return error;
       }
     },
     deleteEmployer: async (_, args) => {
       const { id } = args;
       try {
-        console.log(await Employer.findByIdAndDelete(new mongoose.Types.ObjectId(id)))
-        if ((await Employer.findByIdAndDelete(new mongoose.Types.ObjectId(id))))
-          return true;
+        if (await Employer.findByIdAndDelete(id)) return true;
         else return false;
       } catch (e) {
-        throw new Error(e);
+        return e;
       }
     },
   },
 };
-
-
