@@ -8,9 +8,7 @@ const jwt = require("jsonwebtoken");
 const { sendEmail } = require("../../Utils/sendEmail");
 
 module.exports = {
-  Query: {
-    hello: () => "hello world",
-  },
+
   Mutation: {
     signup: async (_, args) => {
       try {
@@ -44,28 +42,20 @@ module.exports = {
     login: async (_, args) => {
       try {
         const { email, password } = args;
-        if (!email || !password) {
-          throw new Error("Please enter all fields");
-        }
+        if (!email || !password) throw new Error("Please enter all fields");
+        // Find user by email
         const users = await User.findOne({ email });
-        const payload = {
-          userId: users._id,
-          username: users.name,
-        };
+        const payload = { userId: users._id, username: users.name };
         if (users) {
+          // Check if password is correct
           if (await bcryptjs.compare(password, users.password)) {
-            const token = localstorage(
-              "token",
-              gererateAccessToken({ payload }, "120m")
-            );
-            console.log(gererateAccessToken({ payload }, "120m"));
-            return users;
-          } else {
-            throw new Error("Invalid password");
-          }
-        } else {
-          throw new Error("User not exist");
-        }
+            // Generate JWT token
+            const token = gererateAccessToken({ payload }, "120m");
+            localstorage("token", gererateAccessToken({ payload }, "120m"));
+            // Return token
+            return token;
+          } else throw new Error("Invalid password");
+        } else throw new Error("User not exist");
       } catch (error) {
         throw error;
       }
@@ -73,24 +63,18 @@ module.exports = {
     foregetPassword: async (_, args) => {
       try {
         const { email } = args;
-        if (!email) {
-          throw new Error("email is required");
-        }
+        if (!email) throw new Error("email is required");
+          // Find user by email
         const user = await User.findOne({ email });
-        if (!user) {
-          throw new Error("User not exist");
-        } else {
+        if (!user) throw new Error("User not exist");
+        else {
+          // gererate token to get user ID
           localstorage(
             "verifitoken",
             gererateAccessToken({ id: user._id }, "10m")
           );
-          sendEmail(
-            user.email,
-            localstorage("verifitoken"),
-            user.name,
-            "to reset your password",
-            "/restpassword/"
-          );
+          // Send reset token to user via email
+          sendEmail( user.email,localstorage("verifitoken"),user.name,"to reset your password", "/restpassword/");
           return "verifies votre email";
         }
       } catch (error) {
@@ -101,14 +85,14 @@ module.exports = {
     resetPassword: async (_, args, context) => {
       try {
         const { password, token } = args;
+        // Decode token to get user ID
         const decodedToken = jwt.verify(token, process.env.ACCESS_TOKEN);
         if (!decodedToken) throw new Error("error toke");
         else {
+          // Find user by ID and update password
           await User.updateOne(
             { _id: decodedToken._id },
-            {
-              password: bcryptjs.hashSync(password, 10),
-            }
+            { password: bcryptjs.hashSync(password, 10) }
           );
           return "password modifier";
         }

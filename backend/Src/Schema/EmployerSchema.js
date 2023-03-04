@@ -1,21 +1,49 @@
 const { gql } = require("apollo-server-express");
 
 module.exports = gql`
+  scalar ObjectID
+
   type Employer {
-    id: Int
+    _id: ObjectID
     name: String
-    email: String
     password: String
-    role: String
+    date_naissance: String
+    matricule: String
+    data_embauche: String
+    situation_familiale: String
+    nombre_denfant: Int
+    adress: String
+    N_CIMR: String
+    N_CNSS: String
+    Service: String
+    fonction: String
+    siege_social: String
+    email: String
+    cin: String
+    role: ID
+    phoneNumber: String
   }
-  type AuthPayload{
-      user : User
-      token : String
-  }
+
   extend type Query {
-    hello: String
+    ShowEmployer: [Employer]
   }
   extend type Mutation {
-    AddEmployer(name: String!, email: String!): User
+    addEmployer(
+      name: String!
+      email: String!
+      cin: String!
+      date_naissance: String!
+      data_embauche: String!
+      situation_familiale: String!
+      nombre_denfant: Int
+      adress: String!
+      N_CIMR: String!
+      N_CNSS: String!
+      Service: String!
+      fonction: String!
+      siege_social: String!
+      matricule: String! # role: ID!
+    ): String
+    deleteEmployer(id: String!): Boolean
   }
 `;
