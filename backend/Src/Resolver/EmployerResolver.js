@@ -37,14 +37,12 @@ module.exports = {
           matricule,
           role,
         } = args;
-        if (!name || !email) {
-          throw new Error("Please enter all fields");
-        }
+        // if (!name || !email) {
+        //   throw new Error("Please enter all fields");
+        // }
         const roles = await Role.findOne({ role });
         const password = crypto.randomBytes(3).toString("hex");
         const token = crypto.randomBytes(20).toString("hex");
-        console.log(password);
-        console.log(token);
         const haschedPassword = await bcryptjs.hash(password, 10);
         const employer = Employer.create({
           name,
@@ -61,7 +59,7 @@ module.exports = {
           fonction,
           siege_social,
           matricule,
-          // role: roles._id,
+          roleid: roles._id,
           password: haschedPassword,
         });
         if (employer)
@@ -84,6 +82,22 @@ module.exports = {
         else return false;
       } catch (e) {
         return e;
+      }
+    },
+    UpdateEmployer: async (_, args) => {
+      const { id, ...updateData } = args;
+
+      try {
+        // Find the employer by ID and update its data
+        console.log(new mongoose.Types.ObjectId(id))
+        const updatedEmployer = await Employer.updateOne(
+         {_id: new mongoose.Types.ObjectId(id)},
+          updateData
+        );
+        console.log(updatedEmployer);
+        return updatedEmployer;
+      } catch (e) {
+        throw e;
       }
     },
   },

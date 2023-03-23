@@ -5,19 +5,19 @@ const user = new mongoose.Schema(
 {
   name:{
     type: String,
-    required: true
+    // required: true
   }, 
   email:{
     type: String,
     unique: true,
     trim: true,
-    required: true
+    // required: true
   },
   cin:{
     type: String,
-    unique: true,
-    trim: true,
-    required: true
+    // unique: true,
+    // trim: true,
+    // required: true
   },
   password:String,
   data_embauche:Date,
@@ -33,28 +33,28 @@ const user = new mongoose.Schema(
     type: String,
     unique: true,
     trim: true,
-    required: true
+    // required: true
   },
   N_CIMR:{
     type: String,
     unique: true,
     trim: true,
-    required: true
+    // required: true
   }, 
   Service:{
     type: String,
     trim: true,
-    required: true
+    // required: true
   },
   fonction:{
     type: String,
     trim: true,
-    required: true
+    // required: true
   }, 
   siege_social:{
     type: String,
     trim: true,
-    required: true
+    // required: true
   },
   roleid:{
     type: mongoose.Schema.Types.ObjectId,

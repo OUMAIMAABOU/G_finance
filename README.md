@@ -22,7 +22,7 @@ Grâce à notre site web permet de bien gérer l'activité économique et financ
 **Technologie**
 
 - **Back-end :**
-- Réaliser votre application avec NodeJS(expresjs) / GraphQ / MongoDB
+- Réaliser mon application avec NodeJS (Express.js), GraphQL et MongoDB
 - Utiliser Mongoose comme ODM pour la connexion avec la base données
 - Les Testes Unitaires pour chaque Controller
 - Programmer middleware pour La gestion des erreurs

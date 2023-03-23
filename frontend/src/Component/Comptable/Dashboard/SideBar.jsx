@@ -21,7 +21,9 @@ export default function SideBar() {
       <NavBar position="absolute" open={open}>
         <Toolbar
           sx={{
-            pr: "24px", 
+            pr: "24px",
+            background: "#1939DA",
+            color: "#EAEBED",
           }}
         >
           <IconButton
@@ -52,23 +54,34 @@ export default function SideBar() {
           </IconButton>
         </Toolbar>
       </NavBar>
-      <Drawer variant="permanent" open={open}>
+      <Drawer variant="permanent" open={open}
+       sx={{
+        background: "#768CFE",
+      }}>
         <Toolbar
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "flex-end",
-            px: [1],
-          }}
+          // sx={{
+          //   display: "flex",
+          //   alignItems: "center",
+          //   justifyContent: "flex-end",
+          //   px: [1],
+          //   background: "#768CFE",
+          // }}
         >
           <IconButton onClick={toggleDrawer}>
             <ChevronLeftIcon />
           </IconButton>
         </Toolbar>
         <Divider />
-        <List component="nav">
+        <List
+          // sx={{
+          //   background: "#768CFE",
+          // }}
+          component="nav"
+        >
           {mainListItems}
-          <Divider sx={{ my: 1 }} />
+
+
+
         </List>
       </Drawer>
     </>
