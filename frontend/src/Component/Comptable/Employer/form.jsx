@@ -1,34 +1,17 @@
 import { useState } from "react";
 import { Box, Button } from "@mui/material";
-import { Body } from "./Body";
+import { Body, Date } from "./Body";
 import { useMutation, ApolloError } from "@apollo/client";
 import { Add } from "../../../Api/Mutation/MutationEmployer";
 export default function Form() {
   const [AddEmployer, { data, error }] = useMutation(Add);
-  const [Employer, SetEmployer] = useState({
-    name: "",
-    email: "",
-    cin: "",
-    dateNaissance: "",
-    dataEmbauche: "",
-    situationFamiliale: "",
-    adress: "",
-    nCimr: "",
-    nCnss: "",
-    service: "",
-    fonction: "",
-    siegeSocial: "",
-    matricule: "",
-    role: "",
-  });
+  const [Employer, SetEmployer] = useState({});
   const onchange = (e) => {
     SetEmployer(() => ({
       ...Employer,
       [e.target.name]: e.target.value,
     }));
-    console.log(Employer);
   };
-  console.log(Employer);
   function handleSubmit(e) {
     try {
       e.preventDefault();
@@ -36,23 +19,22 @@ export default function Form() {
         variables: {
           name: Employer.name,
           email: Employer.email,
-            cin: Employer.cin,
-            dateNaissance: Employer.dateNaissance,
-            dataEmbauche: Employer.dataEmbauche,
-            situationFamiliale: Employer.situationFamiliale,
-            adress: Employer.adress,
-            nCimr: Employer.nCimr,
-            nCnss: Employer.nCnss,
-            service: Employer.service,
-            fonction: Employer.fonction,
-            siegeSocial: Employer.siegeSocial,
-            matricule: Employer.matricule,
+          cin: Employer.cin,
+          dateNaissance: Employer.dateNaissance,
+          dataEmbauche: Employer.dataEmbauche,
+          situationFamiliale: Employer.situationFamiliale,
+          adress: Employer.adress,
+          nCimr: Employer.nCimr,
+          nCnss: Employer.nCnss,
+          service: Employer.service,
+          fonction: Employer.fonction,
+          siegeSocial: Employer.siegeSocial,
+          matricule: Employer.matricule,
           role: Employer.role,
         },
       }).then((res) => {
         console.log(data);
       });
-      console.log(Employer);
     } catch (e) {
       console.log(e);
     }
@@ -104,18 +86,21 @@ export default function Form() {
           <Body
             nameInput="fonction"
             title="fonction"
+            EventOnChange={onchange}
             InputValue={Employer.fonction}
           />
           <Body
             nameInput="siegeSocial"
             title="Siege Social"
+            EventOnChange={onchange}
             InputValue={Employer.siegeSocial}
           />
           <Body
             nameInput="role"
             title="role"
             EventOnChange={onchange}
-            InputValue="comptable"
+            InputValue={Employer.role}
+
           />
         </Box>
 
@@ -155,10 +140,9 @@ export default function Form() {
           />
           <Body
             nameInput="dataEmbauche"
-            title="date Embauche"
-            type="date"
             EventOnChange={onchange}
             InputValue={Employer.dataEmbauche}
+            type="date"
           />
         </Box>
 

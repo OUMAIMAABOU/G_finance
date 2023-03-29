@@ -6,14 +6,21 @@ export const GET_EMPLOYER = gql`
       N_CIMR
       N_CNSS
       Service
-      data_embauche
-      email
-      fonction
-      name
-      phoneNumber
       _id
       adress
       cin
+      data_embauche
+      date_naissance
+      email
+      fonction
+      matricule
+      name
+      nombre_denfant
+      password
+      phoneNumber
+      role
+      siege_social
+      situation_familiale
     }
   }
 `;

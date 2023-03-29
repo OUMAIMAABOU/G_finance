@@ -54,18 +54,21 @@ export default function SideBar() {
           </IconButton>
         </Toolbar>
       </NavBar>
-      <Drawer variant="permanent" open={open}
-       sx={{
-        background: "#768CFE",
-      }}>
+      <Drawer
+        variant="permanent"
+        open={open}
+        sx={{
+          background: "#768CFE",
+        }}
+      >
         <Toolbar
-          // sx={{
-          //   display: "flex",
-          //   alignItems: "center",
-          //   justifyContent: "flex-end",
-          //   px: [1],
-          //   background: "#768CFE",
-          // }}
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "flex-end",
+            px: [1],
+            background: "#768CFE",
+          }}
         >
           <IconButton onClick={toggleDrawer}>
             <ChevronLeftIcon />
@@ -73,16 +76,16 @@ export default function SideBar() {
         </Toolbar>
         <Divider />
         <List
-          // sx={{
-          //   background: "#768CFE",
-          // }}
+          sx={{
+            background: "#768CFE",
+            display: "flex",
+            flexDirection: "column",
+          }}
           component="nav"
         >
           {mainListItems}
-
-
-
         </List>
+        {/* <List>{mainListItems}</List> */}
       </Drawer>
     </>
   );

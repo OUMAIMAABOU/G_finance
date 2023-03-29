@@ -15,14 +15,15 @@ export default function LayoutDashboard({ children }) {
           <CssBaseline />
           <SideBar />
           <Box
-            component="main"
+            // component="main"
             sx={{
               backgroundColor: (theme) =>
                 theme.palette.mode === "light"
                   ? theme.palette.grey[100]
                   : theme.palette.grey[900],
-              flexGrow: 1,
+              // flexGrow: 1,
               height: "100vh",
+              width: "100%",
               overflow: "auto",
             }}
           >

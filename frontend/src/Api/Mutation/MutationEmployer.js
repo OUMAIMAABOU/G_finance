@@ -37,6 +37,13 @@ export const Add = gql`
 `;
 export const DELETE = gql`
   mutation DeleteEmployer($deleteEmployerId: ObjectID!) {
-  deleteEmployer(id: $deleteEmployerId)
-}
+    deleteEmployer(id: $deleteEmployerId)
+  }
+`;
+export const Put = gql`
+  mutation UpdateEmployer($updateEmployerId: ObjectID!$input: EmployerInput!) {
+    UpdateEmployer(id: $updateEmployerId, input: $input) {
+      name
+    }
+  }
 `;
