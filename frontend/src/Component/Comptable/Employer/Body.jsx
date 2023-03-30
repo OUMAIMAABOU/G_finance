@@ -7,6 +7,7 @@ export function Body(props) {
       <Input
         id="my-input"
         name={props.nameInput}
+        // label={props.title}
         aria-describedby="my-helper-text"
         type={props.type}
         onChange={props.EventOnChange}
@@ -17,16 +18,19 @@ export function Body(props) {
   );
 }
 
-export function Date(props) {
+export function inputBody(props) {
   return (
     <TextField
-    id="outlined-controlled"
-    label="Controlled"
-    name={props.nameInput}
-    type="date"
-    value={props.value}
-    onChange={props.EventOnChange}
+              margin="normal"
+              required
+              id="email"
+              label={props.title}
+              name={props.nameInput}
+              type={props.type}
+              autoFocus
+              value={props.valueInput}
+              onChange={props.EventOnChange}
 
-  />
+            />
   );
 }

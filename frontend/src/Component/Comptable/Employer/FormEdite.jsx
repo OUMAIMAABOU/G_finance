@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Box, Button } from "@mui/material";
-import { Body, Date } from "./Body";
+import { Body, inputBody } from "./Body";
 import { useMutation, ApolloError } from "@apollo/client";
 import { Add } from "../../../Api/Mutation/MutationEmployer";
 

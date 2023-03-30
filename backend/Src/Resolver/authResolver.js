@@ -82,7 +82,7 @@ module.exports = {
       }
     },
 
-    resetPassword: async (_, args, context) => {
+    resetPassword: async (_, args) => {
       try {
         const { password, token } = args;
         // Decode token to get user ID
@@ -96,6 +96,14 @@ module.exports = {
           );
           return "password modifier";
         }
+      } catch (error) {
+        throw error;
+      }
+    },
+
+    verifierToken: async (_, args, context) => {
+      try {
+      
       } catch (error) {
         throw error;
       }

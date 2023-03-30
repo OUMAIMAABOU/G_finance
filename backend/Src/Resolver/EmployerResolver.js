@@ -3,7 +3,7 @@ const Employer = require("../../Models/userModel");
 const Role = require("../../Models/RoleModel");
 const bcryptjs = require("bcryptjs");
 const crypto = require("crypto");
-const { sendEmail } = require("../../Utils/sendEmail");
+const { sendEmailPassword } = require("../../Utils/sendEmail");
 const mongoose = require("mongoose");
 
 module.exports = {
@@ -19,7 +19,6 @@ module.exports = {
   Mutation: {
     addEmployer: async (_, args) => {
       try {
-        // b96c3c
         const {
           name,
           email,
@@ -37,12 +36,11 @@ module.exports = {
           matricule,
           role,
         } = args;
-        // if (!name || !email) {
-        //   throw new Error("Please enter all fields");
-        // }
+        if (!name || !email) {
+          throw new Error("Please enter all fields");
+        }
         const roles = await Role.findOne({ role });
         const password = crypto.randomBytes(3).toString("hex");
-        const token = crypto.randomBytes(20).toString("hex");
         const haschedPassword = await bcryptjs.hash(password, 10);
         const employer = Employer.create({
           name,
@@ -63,13 +61,7 @@ module.exports = {
           password: haschedPassword,
         });
         if (employer)
-          sendEmail(
-            email,
-            "fdfsd",
-            name,
-            "to reset your password",
-            "/restpassword/"
-          );
+        sendEmailPassword(email,name,password);
         return "The Employe was created successfully";
       } catch (error) {
         return error;
@@ -84,17 +76,15 @@ module.exports = {
         return e;
       }
     },
-    UpdateEmployer: async (_, args) => {
-      const { id, ...updateData } = args;
-
+    UpdateEmployer: async (_, { id, input }) => {
       try {
         // Find the employer by ID and update its data
-        console.log(new mongoose.Types.ObjectId(id))
-        const updatedEmployer = await Employer.updateOne(
-         {_id: new mongoose.Types.ObjectId(id)},
-          updateData
+
+        const updatedEmployer = await Employer.findByIdAndUpdate(
+          new mongoose.Types.ObjectId(id),
+          { ...input },
+          { new: true }
         );
-        console.log(updatedEmployer);
         return updatedEmployer;
       } catch (e) {
         throw e;

@@ -15,5 +15,6 @@ module.exports = gql`
     role(role: String!): User
     foregetPassword(email: String!): String
     resetPassword(password: String!, token: String!): User
+    verifierToken(token:String!):User
   }
 `;

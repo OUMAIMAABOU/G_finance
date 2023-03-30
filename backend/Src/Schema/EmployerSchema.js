@@ -70,6 +70,6 @@ module.exports = gql`
     #  Define the GraphQL mutation for Ddeleting an employer
     deleteEmployer(id: ObjectID!): Boolean
     #  Define the GraphQL mutation for updating an employer
-    UpdateEmployer(id: ObjectID!, Input: EmployerInput): Employer
+    UpdateEmployer(id: ObjectID!, input: EmployerInput!): Employer
   }
 `;
