@@ -5,7 +5,7 @@ import { useMutation, ApolloError } from "@apollo/client";
 import { Add } from "../../../Api/Mutation/MutationEmployer";
 
 export default function FormEdite(props) {
-    const [AddEmployer, { data, error }] = useMutation(Add);
+  const [AddEmployer, { data, error }] = useMutation(Add);
   const [Employer, SetEmployer] = useState({});
   const onchange = (e) => {
     SetEmployer(() => ({
@@ -42,140 +42,126 @@ export default function FormEdite(props) {
   }
   return (
     <form onSubmit={handleSubmit}>
-    <Box sx={{ display: "flex" }}>
-      <Body
-        nameInput="name"
-        title="Name"
-        EventOnChange={onchange}
-        InputValue={Employer.name}
-        valueInput={props.name}
+      <Box sx={{ display: "flex" }}>
+        <Body
+          nameInput="name"
+          title="Name"
+          EventOnChange={onchange}
+          InputValue={Employer.name}
+          Value={props.name}
+        />
+        <Body
+          nameInput="cin"
+          title="CIN"
+          EventOnChange={onchange}
+          InputValue={Employer.cin}
+          Value={props.cin}
+        />
+        <Body
+          nameInput="email"
+          title="Email"
+          type="email"
+          EventOnChange={onchange}
+          InputValue={Employer.email}
+          Value={props.email}
+        />
+      </Box>
+      <Box sx={{ display: "flex" }}>
+        <Body
+          nameInput="phoneNumber"
+          title="Phone"
+          EventOnChange={onchange}
+          Value={props.phone}
+        />
+        <Body
+          nameInput="adress"
+          title="adress"
+          EventOnChange={onchange}
+          InputValue={Employer.adress}
+          Value={props.address}
+        />
+        <Body
+          nameInput="service"
+          title="service"
+          EventOnChange={onchange}
+          InputValue={Employer.service}
+          Value={props.service}
+        />
+      </Box>
+      <Box sx={{ display: "flex" }}>
+        <Body
+          nameInput="fonction"
+          title="fonction"
+          EventOnChange={onchange}
+          InputValue={Employer.fonction}
+          Value={props.fonction}
+        />
+        <Body
+          nameInput="siegeSocial"
+          title="Siege Social"
+          EventOnChange={onchange}
+          InputValue={Employer.siegeSocial}
+          Value={props.siegeSocial}
+        />
+        <Body
+          nameInput="role"
+          title="role"
+          EventOnChange={onchange}
+          InputValue="comptable"
+        />
+      </Box>
 
-      />
-      <Body
-        nameInput="cin"
-        title="CIN"
-        EventOnChange={onchange}
-        InputValue={Employer.cin}
-        valueInput={props.cin}
-      />
-      <Body
-        nameInput="email"
-        title="Email"
-        type="email"
-        EventOnChange={onchange}
-        InputValue={Employer.email}
-        valueInput={props.email}
+      <Box sx={{ display: "flex" }}>
+        <Body
+          nameInput="nCimr"
+          title="CIMR"
+          EventOnChange={onchange}
+          InputValue={Employer.nCimr}
+          Value={props.nCimr}
+        />
+        <Body
+          nameInput="nCnss"
+          title="CNSS"
+          EventOnChange={onchange}
+          InputValue={Employer.nCnss}
+          Value={props.nCnss}
+        />
+        <Body
+          nameInput="matricule"
+          title="Matricule"
+          EventOnChange={onchange}
+          InputValue={Employer.matricule}
+          Value={props.matricul}
+        />
+      </Box>
+      <Box sx={{ display: "flex" }}>
+        <Body
+          nameInput="situationFamiliale"
+          title="Situation Familiale"
+          EventOnChange={onchange}
+          InputValue={Employer.situationFamiliale}
+          Value={props.situationFamiliale}
+        />
+        <Body
+          nameInput="dateNaissance"
+          title="date Naissance"
+          type="date"
+          EventOnChange={onchange}
+          InputValue={Employer.dateNaissance}
+          Value={props.dateNaissance}
+        />
+        <Body
+          nameInput="dataEmbauche"
+          EventOnChange={onchange}
+          type="date"
+          InputValue={Employer.dataEmbauche}
+          Value={props.dataEmbauche}
+        />
+      </Box>
 
-      />
-    </Box>
-    <Box sx={{ display: "flex" }}>
-      <Body
-        nameInput="phoneNumber"
-        title="Phone"
-        EventOnChange={onchange}
-        valueInput={props.phone}
-
-      />
-      <Body
-        nameInput="adress"
-        title="adress"
-        EventOnChange={onchange}
-        InputValue={Employer.adress}
-        valueInput={props.address}
-
-      />
-      <Body
-        nameInput="service"
-        title="service"
-        EventOnChange={onchange}
-        InputValue={Employer.service}
-        valueInput={props.service}
-
-
-      />
-    </Box>
-    <Box sx={{ display: "flex" }}>
-      <Body
-        nameInput="fonction"
-        title="fonction"
-        EventOnChange={onchange}
-        InputValue={Employer.fonction}
-        valueInput={props.fonction}
-
-      />
-      <Body
-        nameInput="siegeSocial"
-        title="Siege Social"
-        EventOnChange={onchange}
-        InputValue={Employer.siegeSocial}
-        valueInput={props.siegeSocial}
-
-      />
-      <Body
-        nameInput="role"
-        title="role"
-        EventOnChange={onchange}
-        InputValue="comptable"
-        
-      />
-    </Box>
-
-    <Box sx={{ display: "flex" }}>
-      <Body
-        nameInput="nCimr"
-        title="CIMR"
-        EventOnChange={onchange}
-        InputValue={Employer.nCimr}
-        valueInput={props.nCimr}
-
-      />
-      <Body
-        nameInput="nCnss"
-        title="CNSS"
-        EventOnChange={onchange}
-        InputValue={Employer.nCnss}
-        valueInput={props.nCnss}
-      />
-      <Body
-        nameInput="matricule"
-        title="Matricule"
-        EventOnChange={onchange}
-        InputValue={Employer.matricule}
-        valueInput={props.matricul}
-
-      />
-    </Box>
-    <Box sx={{ display: "flex" }}>
-      <Body
-        nameInput="situationFamiliale"
-        title="Situation Familiale"
-        EventOnChange={onchange}
-        InputValue={Employer.situationFamiliale}
-        valueInput={props.situationFamiliale}
-
-      />
-      <Body
-        nameInput="dateNaissance"
-        title="date Naissance"
-        type="date"
-        EventOnChange={onchange}
-        InputValue={Employer.dateNaissance}
-        valueInput={props.dateNaissance}
-
-      />
-      <Body
-        nameInput="dataEmbauche"
-        EventOnChange={onchange}
-        type="date"
-        InputValue={Employer.dataEmbauche}
-        valueInput={props.dataEmbauche}
-
-
-      />
-    </Box>
-
-    <Button type="submit" variant="outlined">
-      Outlined
-    </Button>
-  </form>  )
+      <Button type="submit" variant="outlined">
+        Outlined
+      </Button>
+    </form>
+  );
 }

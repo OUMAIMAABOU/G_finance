@@ -11,7 +11,7 @@ export function Body(props) {
         aria-describedby="my-helper-text"
         type={props.type}
         onChange={props.EventOnChange}
-        value={props.valueInput}
+        value={props.Value}
 
       />
     </FormControl>

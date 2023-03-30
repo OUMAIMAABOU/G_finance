@@ -1,4 +1,4 @@
-const { ApolloServer, gql } = require("apollo-server-express");
+const { ApolloServer, gql,ApolloError} = require("apollo-server-express");
 const User = require("../../Models/userModel");
 const Role = require("../../Models/RoleModel");
 const bcryptjs = require("bcryptjs");
@@ -50,8 +50,8 @@ module.exports = {
           // Check if password is correct
           if (await bcryptjs.compare(password, users.password)) {
             // Generate JWT token
-            const token = gererateAccessToken({ payload }, "120m");
-            localstorage("token", gererateAccessToken({ payload }, "120m"));
+            const token = gererateAccessToken({ payload }, "2H");
+            localstorage("token", gererateAccessToken({ payload }, "2H"));
             // Return token
             return token;
           } else throw new Error("Invalid password");
@@ -102,13 +102,28 @@ module.exports = {
       }
     },
 
-    verifierToken: async (_, token) => {
+    verifierToken: async (_, token,context) => {
       try {
         const decodedToken = jwt.verify(token.token, process.env.ACCESS_TOKEN);
-        if(decodedToken) return decodedToken.payload.username 
-        else return null
+        if(decodedToken){
+           const users = await User.findById(decodedToken.payload.userId);
+        if(users)  { 
+          context.status = 200;
+          return decodedToken.payload.username
+         }
+        else  {
+          context.status = 400;
+          return "can't find this user"
+        } 
+        }else{
+          context.status = 400;
+          throw new Error("token invalid")
+        }
+       
       } catch (error) {
-        throw error;
+        context.status = 400;
+        throw new Error(error)
+
       }
     },
   },

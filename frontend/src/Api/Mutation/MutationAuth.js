@@ -5,3 +5,8 @@ export const LOGIN = gql`
   login(email: $email, password: $password)
 }
 `;
+export const VERIFIER_TOKEN = gql`
+ mutation VerifierToken($token: String!) {
+  verifierToken(token: $token)
+}
+`;

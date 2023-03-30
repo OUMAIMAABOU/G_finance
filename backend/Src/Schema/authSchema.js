@@ -8,7 +8,11 @@ module.exports = gql`
     password: String
     role: ID!
   }
+  type Verfie {
+    token: String
+    status: Int
 
+  }
   extend type Mutation {
     signup(name: String!, email: String!, role: ID!, password: String): User
     login(email: String!, password: String!): String
