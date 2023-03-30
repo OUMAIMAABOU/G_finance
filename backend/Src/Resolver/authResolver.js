@@ -86,6 +86,7 @@ module.exports = {
       try {
         const { password, token } = args;
         // Decode token to get user ID
+        console.log(token)
         const decodedToken = jwt.verify(token, process.env.ACCESS_TOKEN);
         if (!decodedToken) throw new Error("error toke");
         else {
@@ -101,9 +102,11 @@ module.exports = {
       }
     },
 
-    verifierToken: async (_, args, context) => {
+    verifierToken: async (_, token) => {
       try {
-      
+        const decodedToken = jwt.verify(token.token, process.env.ACCESS_TOKEN);
+        if(decodedToken) return decodedToken.payload.username 
+        else return null
       } catch (error) {
         throw error;
       }
