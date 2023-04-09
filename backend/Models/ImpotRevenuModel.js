@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 // create table user
 
-const revenu = new mongoose.Schema(
+const ImpotRevenu = new mongoose.Schema(
   {
     salaire_min: {
       type: Number,
@@ -17,4 +17,4 @@ const revenu = new mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model("revenus", revenu);
+module.exports = mongoose.model("impot_revenus", ImpotRevenu);

@@ -1,13 +1,8 @@
 const mongoose = require("mongoose");
-// create table user
-
+// create table prime
 const prime = new mongoose.Schema(
   {
-    MaxYear: {
-      type: Number,
-      required: true,
-    },
-    MinYear: {
+    year: {
       type: Number,
       required: true,
     },

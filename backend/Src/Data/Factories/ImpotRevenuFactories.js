@@ -1,0 +1,38 @@
+const ImpotRevenu=[
+    {
+        salaire_min:0,
+        salaire_max:2500,
+        taux:0,
+        somme_deduire:0
+    },
+    {
+        salaire_min:2501,
+        salaire_max:4166,
+        taux:10,
+        somme_deduire:250
+    },
+    {
+        salaire_min:4167,
+        salaire_max:5000,
+        taux:20,
+        somme_deduire:666.67
+    },   {
+        salaire_min:5001,
+        salaire_max:6666,
+        taux:30,
+        somme_deduire:1166.67
+    },   
+    {
+        salaire_min:6667,
+        salaire_max:15000,
+        taux:34,
+        somme_deduire:1433.33
+    },
+    {
+        salaire_min:15001,
+        salaire_max:1000000000,
+        taux:38,
+        somme_deduire:2033.33
+    }
+]
+module.exports=ImpotRevenu
