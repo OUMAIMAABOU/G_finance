@@ -8,29 +8,51 @@ module.exports = gql`
     id_employe: ObjectID
     Anciennet: Int
     Salaire_de_base: Float
-    id_majoration: Float
+    Salaire_brut: Float
+    prime_d_anciennete: Float
+    exoneres: Float
+    deduction: Float
+    salaire_net_imposable:Float
+    Salaire_brut_imposabel:Float
+    IR:Float
+    avance_salair:Float
+    charge_familaire:Float
     datePaie: String
     prime: Float
     total: Float
-    IR: Float
+    IR_brut: Float
+    IR_net: Float
+    CNSS:Float
+    AMO:Float
+    CIMR:Float
+    Mutuele:Float
+    frais_pro:Float
+    Heurs_supplementaire:Float
   }
 
-  extend type Query {
-    ShowAllSalaire: [Employer]
-  }
+  # extend type Query {
+  #   ShowAllSalaire: [Employer]
+  # }
   extend type Mutation {
     #  Define the GraphQL mutation for Adding an salaire for  employer
-    addSalaire(
-      id_employe: ObjectID
-      anciennet: Int
+    calculaireSalaire(
+      id_employe: ObjectID!
       salaire_de_base: Float
-      id_majoration: Float
-      datePaie: String
+      # prime_d_anciennete: Float
       prime: Float
-      total: Float
-      IR: Float
+      datePaie: String
+      Salaire_brut: Float
+      exoneres: Float
+      avance_salair:Float
+      Heurs_supplementaire:Float
+      CNSS:Float
+    AMO:Float
+    CIMR:Float
+    Mutuele:Float
+    frais_pro:Float
+
     ): String
     #  Define the GraphQL mutation for updating an salaire
-    UpdateSalaire(id: ObjectID!): String
+    # UpdateSalaire(id: ObjectID!): String
   }
 `;

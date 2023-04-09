@@ -1,6 +1,7 @@
 const {gql} = require('apollo-server-express');
 const authSchema = require('./authSchema')
 const EmployerSchema = require('./EmployerSchema')
+const salaireSchema=require('./salaireSchema')
 
 
 const baseSchema =  gql`
@@ -16,4 +17,4 @@ type Subscription {
 }
 `;
 
-module.exports =  [baseSchema, authSchema,EmployerSchema]
+module.exports =  [baseSchema, authSchema,EmployerSchema,salaireSchema]

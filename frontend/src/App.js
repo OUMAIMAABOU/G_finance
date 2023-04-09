@@ -6,6 +6,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./Component/Authentification/login";
 import PrivateRouter from "./Router/PrivateRoute";
 import { UserContext } from "./Context/UseContext";
+import CalculerSalaire from "./Component/Comptable/Salaire.jsx/CalculerSalaire";
+
 function App() {
   const [value, setValue] = React.useState("");
   return (
@@ -16,6 +18,7 @@ function App() {
         <Routes>
           <Route element={<PrivateRouter />}>
             <Route path="/employer" element={<Employer />} />
+            <Route path="/salaire" element={<CalculerSalaire />} />
           </Route>
           <Route path="/" element={<Login />} />
         </Routes>

@@ -20,7 +20,7 @@ export default function PrivateRouter() {
         console.log(res);
         setIsLoading(false);
         setToken(res.data);
-        localStorage.setItem("usename",res.data.verifierToken)
+        localStorage.setItem("username",res.data.verifierToken)
       })
       .catch((error) => {
         console.log(error);

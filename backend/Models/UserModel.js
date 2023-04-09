@@ -44,17 +44,14 @@ const user = new mongoose.Schema(
     Service: {
       type: String,
       trim: true,
-      required: true,
     },
     fonction: {
       type: String,
       trim: true,
-      required: true,
     },
     siege_social: {
       type: String,
       trim: true,
-      required: true,
     },
     roleid: {
       type: mongoose.Schema.Types.ObjectId,

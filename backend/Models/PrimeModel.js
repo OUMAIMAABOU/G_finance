@@ -3,7 +3,11 @@ const mongoose = require("mongoose");
 
 const prime = new mongoose.Schema(
   {
-    year: {
+    MaxYear: {
+      type: Number,
+      required: true,
+    },
+    MinYear: {
       type: Number,
       required: true,
     },

@@ -1,22 +1,21 @@
 import * as React from "react";
-import Toolbar from "@mui/material/Toolbar";
-import List from "@mui/material/List";
-import Divider from "@mui/material/Divider";
-import IconButton from "@mui/material/IconButton";
+import {Toolbar,List,Divider,IconButton,Typography,Badge} from "@mui/material";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import { mainListItems } from "./listItems";
-import Typography from "@mui/material/Typography";
-import Badge from "@mui/material/Badge";
 import MenuIcon from "@mui/icons-material/Menu";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import { NavBar, Drawer } from "../../../Tools/SideBar";
+import { UserContext } from "../../../Context/UseContext";
+
 
 export default function SideBar() {
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
   };
-  return (
+  const { value, setValue } =React.useContext(UserContext);
+  setValue(localStorage.getItem("username"));
+ return (
     <>
       <NavBar position="absolute" open={open}>
         <Toolbar
@@ -37,6 +36,7 @@ export default function SideBar() {
             }}
           >
             <MenuIcon />
+
           </IconButton>
           <Typography
             component="h1"
@@ -46,6 +46,11 @@ export default function SideBar() {
             sx={{ flexGrow: 1 }}
           >
             Dashboard
+          </Typography>
+          <Typography sx={{
+            marginRight:2
+          }}>
+             Welcome {value}
           </Typography>
           <IconButton color="inherit">
             <Badge badgeContent={4} color="secondary">

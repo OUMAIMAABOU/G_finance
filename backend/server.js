@@ -6,11 +6,15 @@ const connectDb = require("./Config/config");
 const { ApolloServer } = require("apollo-server-express");
 const schema = require("./src/schema/index");
 const resolvers = require("./Src/Resolver/index");
-
+const helmet = require('helmet');
+const {limiter} = require('./Utils/Security')
 const cors = require("cors");
 const express = require("express");
-
 const app = express();
+
+// Use helmet middleware for additional security measures
+app.use(helmet())
+app.use({ app, path: "/Gfinance" }, limiter);
 
 // app.use(cookieParser());
 app.use(cors({ origin: true, credentials: true }));
@@ -20,18 +24,13 @@ app.use(express.json());
 
 const StartAppoloServer = async () => {
   const server = new ApolloServer({
-    typeDefs: schema,
-    resolvers,
+    typeDefs: schema,resolvers,
     context: ({ req, res }) => ({ req, res }),
-    schemaDirectives: {
-      connection: connectionDefinitions,
-    },
+    schemaDirectives: {connection: connectionDefinitions,},
   });
   await server.start();
   server.applyMiddleware({ app, path: "/Gfinance" });
-  console.log(
-    `apollo server is running at http://localhost:${port}${server.graphqlPath}`
-  );
+  console.log(`apollo server is running at http://localhost:${port}${server.graphqlPath}`);
 };
 
 StartAppoloServer();
@@ -39,11 +38,8 @@ StartAppoloServer();
 // app.use(globalError);
 const port = process.env.PORT || 8090;
 const server = app.listen(port, (err) => {
-  if (!err) {
-    console.log(`the port ${port} is running`);
-  } else {
-    console.log(err);
-  }
+  (!err)?console.log(`the port ${port} is running`): console.log(err);
+  
 });
 
 // Handle errors outside express
