@@ -28,6 +28,7 @@ module.exports = gql`
     Mutuele:Float
     frais_pro:Float
     Heurs_supplementaire:Float
+
   }
 
   # extend type Query {
@@ -37,21 +38,16 @@ module.exports = gql`
     #  Define the GraphQL mutation for Adding an salaire for  employer
     calculaireSalaire(
       id_employe: ObjectID!
-      salaire_de_base: Float
+      salaire_de_base: Float!
       # prime_d_anciennete: Float
-      prime: Float
-      datePaie: String
+      prime: Float!
+      datePaie: String!
       Salaire_brut: Float
-      exoneres: Float
-      avance_salair:Float
-      Heurs_supplementaire:Float
-      CNSS:Float
-    AMO:Float
-    CIMR:Float
-    Mutuele:Float
-    frais_pro:Float
+      exoneres: Float!
+      avance_salair:Float!
+      Heurs_supplementaire:Float!,
 
-    ): String
+    ):Float
     #  Define the GraphQL mutation for updating an salaire
     # UpdateSalaire(id: ObjectID!): String
   }

@@ -15,8 +15,6 @@ const app = express();
 // Use helmet middleware for additional security measures
 app.use(helmet())
 app.use({ app, path: "/Gfinance" }, limiter);
-
-// app.use(cookieParser());
 app.use(cors({ origin: true, credentials: true }));
 app.use(express.json());
 

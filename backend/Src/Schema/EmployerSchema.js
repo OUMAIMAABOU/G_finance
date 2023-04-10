@@ -32,7 +32,7 @@ module.exports = gql`
     matricule: String
     data_embauche: String
     situation_familiale: String
-    nombre_denfant: Int
+    nombre_Denfant: Int
     adress: String
     N_CIMR: String
     N_CNSS: String
@@ -51,21 +51,22 @@ module.exports = gql`
   extend type Mutation {
     #  Define the GraphQL mutation for Adding an employer
     addEmployer(
-      name: String
-      email: String
-      cin: String
-      date_naissance: String
-      data_embauche: String
+      name: String!
+      email: String!
+      cin: String!
+      date_naissance: String!
+      data_embauche: String!
       situation_familiale: String
-      nombre_denfant: Int
+      nombre_Denfant: Int!
       adress: String
-      N_CIMR: String
-      N_CNSS: String
+      N_CIMR: String!
+      N_CNSS: String!
       Service: String
-      fonction: String
+      fonction: String!
       siege_social: String
-      matricule: String
-      role: ObjectID
+      matricule: String!
+      role: ObjectID!
+
     ): String
     #  Define the GraphQL mutation for Ddeleting an employer
     deleteEmployer(id: ObjectID!): Boolean
