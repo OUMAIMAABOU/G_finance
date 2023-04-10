@@ -8,6 +8,9 @@ export default function CalculerSalaire() {
   const [Salairebase,setSalaireBase] = React.useState(false)
   if (loading) return <div>Loading...</div>;
   if (error) return <div>wrong...{error.message}</div>;
+  const showdiv=()=>{
+    Salairebase?setSalaireBase(false):setSalaireBase(true)
+  }
   return (
     <div className="bodyForm">
       <NavBar />
@@ -28,8 +31,15 @@ export default function CalculerSalaire() {
             <div className="tab-content" id="myTabContent">
               <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab" >
                 <h3 className="register-heading">calcul de paie</h3>
+                <div> 
+                </div>
                 <div className="row register-form">
                   <div className="col-md-12">
+                    <div>
+                     <input type="checkbox"  name="subscribe" value="newsletter" onClick={showdiv} />
+                     <label> Salaire de Base</label>
+                    </div>
+
                     <div className="form-group">
                       <select className="form-control">
                         <option className="hidden" selected disabled>
@@ -40,7 +50,8 @@ export default function CalculerSalaire() {
                         ))}
                       </select>
                     </div>
-                    <div className="form-group row ">
+                    {Salairebase && <>
+                        <div className="form-group row ">
                       <Input placeholder="Salaire de base *"/>
                       <Input placeholder="Heurs supplementaire *"/>
                     </div>
@@ -48,6 +59,9 @@ export default function CalculerSalaire() {
                       <Input placeholder="prime d'anciente *"/>
                       <Input placeholder="total de prime *"/>
                     </div>
+                    </>}
+                   
+                  
                   </div>
                   <div className="col-md-12">
                     <div className="form-group">
