@@ -6,7 +6,6 @@ module.exports = gql`
   type Salaire {
     _id: ObjectID
     id_employe: ObjectID
-    Anciennet: Int
     Salaire_de_base: Float
     Salaire_brut: Float
     prime_d_anciennete: Float
@@ -19,7 +18,6 @@ module.exports = gql`
     charge_familaire:Float
     datePaie: String
     prime: Float
-    total: Float
     IR_brut: Float
     IR_net: Float
     CNSS:Float

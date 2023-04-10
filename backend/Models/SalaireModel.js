@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 
 const salaire = new mongoose.Schema(
   {
-    salaire_bruit: {
+    salaire_brut: {
       type: Number,
       required: true,
     },
@@ -12,6 +12,21 @@ const salaire = new mongoose.Schema(
       required: true,
     },
     salaire_net: Number,
+    CNSS:Number,
+    AMO:Number,
+    CIMR:Number,
+    Mutuele:Number,
+    frais_pro:Number,
+    prime: Number,
+    prime_d_anciennete: Number,
+    IR_brut: Number,
+    IR_net: Number,
+    exoneres: Number,
+    deduction: Number,    
+    charge_familaire: Number,
+    nombre_Denfant: Number,
+    Salaire_de_base: Number,
+    avance_salair: Number,
     userid: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "users",

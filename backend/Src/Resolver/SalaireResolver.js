@@ -1,12 +1,9 @@
 const { ApolloServer, gql } = require("apollo-server-express");
 const Employer = require("../../Models/userModel");
-const Prime_anciennete = require("../../Models/PrimeModel");
 const Cotisation = require("../../Models/CotisationModel");
-const salaire = require("../../Models/SalaireModel");
-const IR = require("../../Models/ImpotRevenuModel");
+const Salaire = require("../../Models/SalaireModel");
 const mongoose = require("mongoose");
-const moment = require('moment');
-const {SalaireBrutFn,deductionfn,ImpotRevenuFn} =require('../../Utils/CalculaireSalaire')
+const {SalaireBrutFn,deductionfn,ImpotRevenuFn,PrimeAncienneteFn,IrNetFn} =require('../../Utils/CalculaireSalaire')
 module.exports = {
   // Query: {
   //   ShowEmployer: async () => {
@@ -20,15 +17,41 @@ module.exports = {
   Mutation: {
     calculaireSalaire: async (_, args) => {
       try {
-        let {id_employe,salaire_de_base,prime,datePaie,Salaire_brut,exoneres,avance_salair,Heurs_supplementaire} = args;
+        let {id_employe,salaire_de_base,prime,Salaire_brut,exoneres,avance_salair,Heurs_supplementaire} = args;
         const employe = await Employer.findById(new mongoose.Types.ObjectId(id_employe));
         const Cotisations = await Cotisation.findOne()
         Salaire_brut= await SalaireBrutFn(salaire_de_base, Heurs_supplementaire, prime,id_employe)
-        const Salaire_brut_imposabel = Salaire_brut - exoneres;
+        const Salaire_brut_imposabel = Salaire_brut + exoneres;
         const deductionIR = ((Salaire_brut*Cotisations.frais_prof)/100) + await deductionfn(Salaire_brut);
         const Salaire_net_imposabel = Salaire_brut_imposabel - deductionIR;
-        let ir = await ImpotRevenuFn(Salaire_net_imposabel)
-       return  Salaire_brut - (await deductionfn(Salaire_brut) + ir + avance_salair);
+        let ir_brut = await ImpotRevenuFn(Salaire_net_imposabel)
+        let ir_net = await IrNetFn(ir_brut,id_employe)
+        const  salaire_net=Salaire_brut_imposabel - (await deductionfn(Salaire_brut) + ir_brut + avance_salair);
+        console.log(`1:${Salaire_brut},2:${deductionIR},3:${Salaire_brut_imposabel},4:${ir_brut},5:${salaire_net}`)
+
+         let addsalaire = await  Salaire.create({
+          salaire_brut:Salaire_brut,
+          date_paie:new Date(),
+          salaire_net: salaire_net,
+          CNSS:((Salaire_brut*Cotisations.cnss)/100),
+          AMO:((Salaire_brut*Cotisations.amo)/100),
+           CIMR:((Salaire_brut*Cotisations.cimr)/100),
+           Mutuele:((Salaire_brut*Cotisations.mutuelle)/100),
+          frais_pro:((Salaire_brut*Cotisations.frais_prof)/100), 
+          prime: prime, 
+          prime_d_anciennete: await PrimeAncienneteFn(id_employe)
+          , IR_brut: ir_brut,
+          IR_net: ir_net,
+           exoneres: exoneres,
+           deduction: salaire_de_base * (await deductionfn(Salaire_brut)),
+           nombre_Denfant: employe.nombre_Denfant,
+          Salaire_de_base: salaire_de_base, 
+          avance_salair: avance_salair, 
+          userid:  new mongoose.Types.ObjectId(id_employe),
+        });
+        console.log(Salaire_brut,deductionIR,Salaire_brut_imposabel,ir_brut,salaire_net,addsalaire)
+       if(addsalaire) return 1
+       else return 0
       } catch (error) {
         return error;
       }
