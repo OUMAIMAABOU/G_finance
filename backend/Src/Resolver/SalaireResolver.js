@@ -33,6 +33,20 @@ module.exports = {
         return error;
       }
     },
+    calculaireSalaireBrut: async (_, args) => {
+      try {
+        let {id_employe,datePaie,Salaire_brut,exoneres,avance_salair} = args;
+        const employe = await Employer.findById(new mongoose.Types.ObjectId(id_employe));
+        const Cotisations = await Cotisation.findOne()
+        const Salaire_brut_imposabel = Salaire_brut - exoneres;
+        const deductionIR = ((Salaire_brut*Cotisations.frais_prof)/100) + await deductionfn(Salaire_brut);
+        const Salaire_net_imposabel = Salaire_brut_imposabel - deductionIR;
+        let ir = await ImpotRevenuFn(Salaire_net_imposabel)
+       return  Salaire_brut - (await deductionfn(Salaire_brut) + ir + avance_salair);
+      } catch (error) {
+        return error;
+      }
+    },
 
     // UpdateEmployer: async (_, { id, input }) => {
     //   try {
