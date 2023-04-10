@@ -8,7 +8,6 @@
     "start:prod": "NODE_ENV=production node server.js",
     "start:dev": "nodemon server.js",
     "data": "node Src/Data/Seeders/indexSeeders"
-
   },
   "author": "",
   "license": "ISC",
@@ -26,6 +25,7 @@
     "helmet": "^6.0.1",
     "jsonwebtoken": "^9.0.0",
     "local-storage": "^2.0.0",
+    "moment": "^2.29.4",
     "mongoose": "^7.0.0",
     "nodemailer": "^6.9.1"
   },

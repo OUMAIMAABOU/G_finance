@@ -3,13 +3,20 @@ const mongoose = require("mongoose");
 
 const cotisation = new mongoose.Schema(
   {
-    name: {
-      type: String,
-      required: true,
-    },
-    taux: {
+    amo: {
       type: Number,
-      required: true,
+    },
+    cnss: {
+      type: Number,
+    },
+    cimr: {
+      type: Number,
+    },
+    mutuelle: {
+      type: Number,
+    },
+    frais_prof: {
+      type: Number,
     },
   },
   { timestamps: true }
