@@ -1,20 +1,19 @@
 const { gql } = require("apollo-server-express");
-
 module.exports = gql`
   scalar ObjectID
 
-  type Prime {
+  type ImpotRevenu {
     _id: ObjectID
-    year_min:Int
-    year_max:Int
-    year: Int
+    salaire_min:Float
+    salaire_max:Float
+    somme_deduire: Float
     taux: Int
   }
 
   extend type Query {
-    ShowAllPrime: [Prime]
+    ShowAllRevenu: [ImpotRevenu]
   }
   extend type Mutation {
-    UpdatePrime(id: ObjectID!): String
+    ImpotRevenu(id: ObjectID!): String
   }
 `;

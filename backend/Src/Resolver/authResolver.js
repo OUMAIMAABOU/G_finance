@@ -6,6 +6,7 @@ const gererateAccessToken = require("../../Utils/generateToken");
 const localstorage = require("local-storage");
 const jwt = require("jsonwebtoken");
 const { sendEmail } = require("../../Utils/sendEmail");
+const mongoose = require("mongoose");
 
 module.exports = {
 
@@ -45,7 +46,8 @@ module.exports = {
         if (!email || !password) throw new Error("Please enter all fields");
         // Find user by email
         const users = await User.findOne({ email });
-        const payload = { userId: users._id, username: users.name };
+        const roles = await Role.findById(new mongoose.Types.ObjectId(users.roleid) );
+        const payload = { userId: users._id, username: users.name , role: roles.role};
         if (users) {
           // Check if password is correct
           if (await bcryptjs.compare(password, users.password)) {

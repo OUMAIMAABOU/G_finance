@@ -1,14 +1,15 @@
 const { ApolloServer, gql } = require("apollo-server-express");
-const Prime = require("../../Models/PrimeModel");
+const ImpotRevenu = require("../../Models/ImpotRevenuModel");
 const { Query } = require("./SalaireResolver");
 module.exports = {
   Query: {
-    ShowAllPrime: async () => {
+    ShowAllRevenu: async () => {
       try {
-        return await Prime.find();
+        return await ImpotRevenu.find();
       } catch (e) {
         return e;
       }
     },
   },
+
 };

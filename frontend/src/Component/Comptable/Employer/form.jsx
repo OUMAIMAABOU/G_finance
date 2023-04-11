@@ -33,7 +33,7 @@ export default function Form() {
           role: Employer.role,
         },
       }).then((res) => {
-        console.log(data);
+        console.log(res);
       });
     } catch (e) {
       console.log(e);

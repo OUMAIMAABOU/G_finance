@@ -38,7 +38,6 @@ module.exports = gql`
       id_employe: ObjectID!
       salaire_de_base: Float!
       prime: Float!
-      datePaie: String!
       Salaire_brut: Float
       exoneres: Float!
       avance_salair:Float!

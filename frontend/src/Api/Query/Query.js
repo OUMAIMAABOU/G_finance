@@ -24,3 +24,24 @@ export const GET_EMPLOYER = gql`
     }
   }
 `;
+export const GET_PRIME = gql`
+ query Query {
+  ShowAllPrime {
+    year
+    taux
+    _id
+  }
+}
+`;
+
+export const GET_REVENU = gql`
+query Query {
+  ShowAllRevenu {
+    somme_deduire
+    salaire_min
+    salaire_max
+    taux
+    _id
+  }
+}
+`

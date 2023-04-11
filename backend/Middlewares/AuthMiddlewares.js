@@ -1,10 +1,21 @@
-const express = require('express')
-const apiError = require('../Utils/ErrorUtils')
-const errRoute = express()
+const jwt=require('jsonwebtoken')
+const ls=require('local-storage')
 
-errRoute.all('*',(req,res,next)=>{
-    // create error and send it to error handling midleware
-    const err = new Error(`can't find this route : ${req.originalUrl}`)
-    return next(new apiError(err.message,400))
-    })
-module.exports = errRoute
+function verifyToken(access){
+    return (req,res,next)=>
+    {
+        try
+        {
+            if(ls('token'))
+            {
+            if(jwt.verify(ls('token'),process.env.ACCESS_TOKEN))
+            {
+                req.user=jwt.verify(ls('token'),process.env.ACCESS_TOKEN)
+                if(access.includes(req.user.payload.role)) next()
+                else res.send("You Don’t Have Authorization to View this Page")
+            }
+            }else res.send('You Don’t Have Authorization to View this Page')
+        }catch(e) { return res.status(400).send({message:e})  }     
+    }
+}
+module.exports= {verifyToken}
