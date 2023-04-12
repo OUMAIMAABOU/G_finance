@@ -26,6 +26,7 @@ module.exports = gql`
 
   #  Define the GraphQL input type for updating an employer
   input EmployerInput {
+    _id: ObjectID!
     name: String
     password: String
     date_naissance: String
@@ -71,6 +72,6 @@ module.exports = gql`
     #  Define the GraphQL mutation for Ddeleting an employer
     deleteEmployer(id: ObjectID!): Boolean
     #  Define the GraphQL mutation for updating an employer
-    UpdateEmployer(id: ObjectID!, input: EmployerInput): Employer
+    UpdateEmployer(input: EmployerInput): Float
   }
 `;

@@ -50,7 +50,6 @@ export default function Orders() {
           <TableRow>
             <TableCell>Name</TableCell>
             <TableCell>CIN</TableCell>
-            <TableCell>Phone Number</TableCell>
             <TableCell>Email</TableCell>
             <TableCell>Fonction</TableCell>
             <TableCell>Matricule</TableCell>
@@ -61,7 +60,6 @@ export default function Orders() {
             <TableRow key={row._id}>
               <TableCell>{row.name}</TableCell>
               <TableCell>{row.cin}</TableCell>
-              <TableCell>{row.phoneNumber}</TableCell>
               <TableCell>{row.email}</TableCell>
               <TableCell>{row.fonction}</TableCell>
          

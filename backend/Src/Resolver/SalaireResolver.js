@@ -87,14 +87,5 @@ module.exports = {
         return error;
       }
     },
-
-    UpdateEmployer: async (_, { id, input }) => {
-      try {
-        // Find the employer by ID and update its data
-
-      } catch (e) {
-        throw e;
-      }
-    },
   },
 };

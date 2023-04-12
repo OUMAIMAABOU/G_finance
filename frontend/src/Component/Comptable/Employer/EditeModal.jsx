@@ -9,7 +9,22 @@ export default function EditeModal(props) {
   const classes = useStyles();
   const [modalStyle] = React.useState(getModalStyle);
   const [open, setOpen] = React.useState(false);
-  const [employes, setEmploye] = React.useState({});
+  const [employes, setEmploye] = React.useState({
+    role:"",
+    matricule:"",
+    siegeSocial:"",
+    fonction:"",
+    service:"",
+    N_CNSS:"",
+    N_CIMR:"",
+    adress:"",
+    situationFamiliale:"",
+    dataEmbauche:"",
+    dateNaissance:"",
+    cin:"",
+    email:"",
+    name:"",
+  });
   const [UpdateEmployer, { data, error }] = useMutation(Put);
 
   const handleOpen = () => {
@@ -35,28 +50,24 @@ export default function EditeModal(props) {
       e.preventDefault();
       UpdateEmployer({
         variables: {
-      name: employes.name,
-      email: employes.email,
-      cin: employes.cin,
-      dateNaissance: employes.dateNaissance,
-      dataEmbauche: employes.dataEmbauche,
-      situationFamiliale: employes.situationFamiliale,
-      adress: employes.adress,
-      nCimr: employes.nCimr,
-      nCnss: employes.nCnss,
-      service: employes.service,
-      fonction: employes.fonction,
-      siegeSocial: employes.siegeSocial,
-      matricule: employes.matricule,
-      role: employes.role,
+          input: {
+            _id:props.Employer._id,
+            N_CIMR: employes.N_CIMR,
+            N_CNSS: employes.N_CNSS,
+            cin: employes.cin,
+            name: employes.name,
+            matricule: employes.matricule,
+            email: employes.email
+          },
         },
       }).then((res) => {
-        console.log(data);
+        console.log(res.data);
       });
     } catch (e) {
       console.log(e);
     }
   }
+
   return (
     <div>
       <Button variant="contained" color="primary" onClick={handleOpen}>
@@ -128,7 +139,7 @@ export default function EditeModal(props) {
               />
               <Body
                 nameInput="nCimr"
-                title="CIMR"
+                title="N_CIMR"
                 EventOnChange={onchange}
                 // InputValue={employes.nCimr}
                 Value={employes.N_CIMR}
@@ -137,7 +148,7 @@ export default function EditeModal(props) {
 
             <Box sx={{ display: "flex" }}>
               <Body
-                nameInput="nCnss"
+                nameInput="N_CNSS"
                 title="CNSS"
                 EventOnChange={onchange}
                 // InputValue={Employer.nCnss}
@@ -171,7 +182,7 @@ export default function EditeModal(props) {
                 EventOnChange={onchange}
                 type="date"
                 // InputValue={Employer.dataEmbauche}
-                Value={employes.data_embauche}
+                Value={employes.dateNaissance}
               />
             </Box>
 

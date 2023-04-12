@@ -32,9 +32,10 @@ export default function NavBar() {
             </a>
           </li>
           <li>
-            <a href="#" className="nav-link px-2 text-light">
+            <Link to="/employer" className="nav-link px-2 text-light">
               Emplyer
-            </a>
+            </Link>
+            
           </li>
           <li>
             <a href="#" className="nav-link px-2 text-light">

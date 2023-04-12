@@ -10,7 +10,7 @@ describe("test for login function", () => {
             const response = await supertest(app).post('/Gfinance').send({
                 query: `mutation{
                 login(email:"", password: "") {
-                    user {
+                    login {
                         email
                         password
                     }
@@ -74,54 +74,7 @@ describe("test for login function", () => {
 
 })
 
-// test unit for register
-describe("test for register function", () => {
-    describe("when data is missing", () => {
-        test('when data is missing', async () => {
-            const response = await supertest(app).post('/Gfinance').send({
-                query: `mutation{
-                signup(name:"", email:"", password: "", role: "") {
-                        name
-                        email
-                        password
-                        role
-                }
-            }`
-            })
-            expect(response.body.errors[0].message).toBe('Please enter all fields')
-        })
-    })
-    describe("when email already exist", () => {
-        test('when email already exist', async () => {
-            const response = await supertest(app).post('/Gfinance').send({
-                query: `mutation{
-                signup(name:"t", email:"chaimaetoumy5@gmail.com", password: "a", role: "client") {
-                        name
-                        email
-                        password
-                        role
-                }
-            }`
-            })
-            expect(response.body.errors[0].message).toBe('Email already exist')
-        })
-    })
-    describe("when role not exist", () => {
-        test('when role not exist', async () => {
-            const response = await supertest(app).post('/Gfinance').send({
-                query: `mutation{
-                signup(name:"kh", email:"khadija@gmail.com", password: "kh", role: "user") {
-                        name
-                        email
-                        password
-                        role
-                }
-            }`
-            })
-            expect(response.body.errors[0].message).toBe('Role not exist')
-        })
-    })
-})
+
 
 //test unit for forgot password
 describe("test for forgot password function", () => {

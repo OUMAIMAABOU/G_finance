@@ -1,9 +1,8 @@
 import React from "react";
 import { Modal, Button, Box } from "@material-ui/core";
 import { getModalStyle, useStyles } from "../../../Tools/model";
-// import { PUT } from "../../../Api/Mutation/MutationIR";
+import { PUT } from "../../../Api/Mutation/MutationRevenu";
 import { useMutation } from "@apollo/client";
-import { Body } from "../Employer/Body";
 export default function EditeModal(props) {
   const classes = useStyles();
   const [modalStyle] = React.useState(getModalStyle);
@@ -11,8 +10,11 @@ export default function EditeModal(props) {
   const [IRdata, setIR] = React.useState({
     id: "",
     taux: 0,
+    salaire_max: 0,
+    salaire_min: 0,
+    somme_deduire: 0,
   });
-  // const [UpdateIR, { data, error }] = useMutation(PUT);
+  const [updateImpotRevenu, { data, error }] = useMutation(PUT);
 
   const handleOpen = () => {
     setOpen(true);
@@ -34,19 +36,24 @@ export default function EditeModal(props) {
   function handleSubmit(e) {
     try {
       e.preventDefault();
-      // UpdateIR({
-      //   variables: {
-      //     updateIRId: props.Edite._id,
-      //     taux: parseInt(IRdata.taux),
-      //   },
-      // }).then((res) => {
-      //   console.log(res);
-      // });
+      updateImpotRevenu({
+        variables: {
+          input: {
+            _id: props.Edite._id,
+            salaire_min: parseInt(IRdata.salaire_min),
+            salaire_max: parseInt(IRdata.salaire_max),
+            somme_deduire: parseInt(IRdata.somme_deduire),
+            taux: parseInt(IRdata.taux),
+          },
+        },
+      }).then((res) => {
+        console.log(res);
+
+      });
     } catch (e) {
       console.log(e);
     }
   }
-  console.log(IRdata);
   return (
     <div>
       <Button variant="contained" color="primary" onClick={handleOpen}>
@@ -68,7 +75,7 @@ export default function EditeModal(props) {
                   <input
                     class="form-control"
                     id="exampleInputPassword1"
-                    name="taux"
+                    name="salaire_max"
                     onChange={onchange}
                     value={IRdata.salaire_max}
                   />{" "}
@@ -77,7 +84,7 @@ export default function EditeModal(props) {
                   <label>Salaire min </label>
                   <input
                     class="form-control"
-                    name="taux"
+                    name="salaire_min"
                     onChange={onchange}
                     value={IRdata.salaire_min}
                   />
@@ -88,7 +95,7 @@ export default function EditeModal(props) {
                   <label>Somme deduire </label>
                   <input
                     class="form-control"
-                    name="taux"
+                    name="somme_deduire"
                     onChange={onchange}
                     value={IRdata.somme_deduire}
                   />

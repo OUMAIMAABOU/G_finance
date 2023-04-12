@@ -41,9 +41,7 @@ export const DELETE = gql`
   }
 `;
 export const Put = gql`
-  mutation UpdateEmployer($updateEmployerId: ObjectID!$input: EmployerInput!) {
-    UpdateEmployer(id: $updateEmployerId, input: $input) {
-      name
-    }
-  }
+  mutation Mutation($input: EmployerInput) {
+  UpdateEmployer(input: $input)
+}
 `;

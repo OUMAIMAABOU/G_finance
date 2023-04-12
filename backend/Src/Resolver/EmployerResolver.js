@@ -76,19 +76,16 @@ module.exports = {
         return e;
       }
     },
-    UpdateEmployer: async (_, { id, input }) => {
+    UpdateEmployer: async (_, {input }) => {
       try {
         // Find the employer by ID and update its data
-        console.log("input")
-
         const updatedEmployer = await Employer.findByIdAndUpdate(
-          new mongoose.Types.ObjectId(id),
+          new mongoose.Types.ObjectId(input._id),
           { ...input },
           { new: true }
         );
-
-        console.log(updatedEmployer)
-        return updatedEmployer;
+        if(updatedEmployer) return true;
+        else return false
       } catch (e) {
         throw e;
       }

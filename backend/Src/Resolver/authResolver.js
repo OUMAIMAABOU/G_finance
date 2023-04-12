@@ -91,6 +91,7 @@ module.exports = {
         console.log(token)
         const decodedToken = jwt.verify(token, process.env.ACCESS_TOKEN);
         if (!decodedToken) throw new Error("error toke");
+        if (!password) throw new Error("Password is required");
         else {
           // Find user by ID and update password
           await User.updateOne(

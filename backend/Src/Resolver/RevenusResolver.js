@@ -12,18 +12,15 @@ module.exports = {
     },
   },
   Mutation: {
-    updateImpotRevenu: async (_, { id, args }) => {
+    updateImpotRevenu: async (_,  {input} ) => {
       try {
-let {salaire_min, salaire_max,sommeDeduire,taux}=args
-console.log(salaire_min, salaire_max,sommeDeduire,taux)
-        const UpdatePrime = await ImpotRevenu.findByIdAndUpdate(
-          new mongoose.Types.ObjectId(id),
-          {salaire_min:salaire_min, salaireMax:salaire_max,somme_deduire:sommeDeduire,taux:taux},
+        const ImpotRevenus = await ImpotRevenu.findByIdAndUpdate(
+          new mongoose.Types.ObjectId(input._id),
+          {...input},
           { new: true }
         );
 
-        console.log(UpdatePrime)
-       if(UpdatePrime) return true
+       if(ImpotRevenus) return true
        else return false
       } catch (e) {
         throw e;
