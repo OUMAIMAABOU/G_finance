@@ -70,7 +70,7 @@ export default function Orders() {
               </Button>
               <TableCell>
                 <Button onClick={() => deleteEmployebyId(row._id)}>
-                  delete
+                  drop
                 </Button>
               </TableCell>
             </TableRow>

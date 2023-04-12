@@ -46,10 +46,10 @@ module.exports = gql`
 
     calculaireSalaireBrut(
       id_employe: ObjectID!
-      datePaie: String!
       Salaire_brut: Float
       exoneres: Float!
-      avance_salair:Float!
+      avance_salair:Float!,
+      prime:Float
     ):Float
     #  Define the GraphQL mutation for updating an salaire
     # UpdateSalaire(id: ObjectID!): String

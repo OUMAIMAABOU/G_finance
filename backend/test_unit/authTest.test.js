@@ -7,7 +7,7 @@ describe("test for login function", () => {
     //when email and password is missing
     describe("when email and password is missing", () => {
         test('without email and password', async () => {
-            const response = await supertest(app).post('/graphql').send({
+            const response = await supertest(app).post('/Gfinance').send({
                 query: `mutation{
                 login(email:"", password: "") {
                     user {
@@ -24,7 +24,7 @@ describe("test for login function", () => {
     // //incorrect password
     describe("incorrect password ", () => {
         test('incorrect password ', async () => {
-            const response = await supertest(app).post('/graphql').send({
+            const response = await supertest(app).post('/Gfinance').send({
                 query: `mutation{
                 login(email:"chaimaetoumy5@gmail.com", password: "azerty") {
                     user {
@@ -41,7 +41,7 @@ describe("test for login function", () => {
     //email not verified
     describe("email not verified", () => {
         test('email not verified', async () => {
-            const response = await supertest(app).post('/graphql').send({
+            const response = await supertest(app).post('/Gfinance').send({
                 query: `mutation{
                 login(email:"youcode2022@gmail.com", password: "test") {
                     user {
@@ -58,7 +58,7 @@ describe("test for login function", () => {
     //user not exist
     describe("user not exist ", () => {
         test('user not exist ', async () => {
-            const response = await supertest(app).post('/graphql').send({
+            const response = await supertest(app).post('/Gfinance').send({
                 query: `mutation{
                 login(email:"test@gmail.com", password: "abc") {
                     user {
@@ -78,7 +78,7 @@ describe("test for login function", () => {
 describe("test for register function", () => {
     describe("when data is missing", () => {
         test('when data is missing', async () => {
-            const response = await supertest(app).post('/graphql').send({
+            const response = await supertest(app).post('/Gfinance').send({
                 query: `mutation{
                 signup(name:"", email:"", password: "", role: "") {
                         name
@@ -93,7 +93,7 @@ describe("test for register function", () => {
     })
     describe("when email already exist", () => {
         test('when email already exist', async () => {
-            const response = await supertest(app).post('/graphql').send({
+            const response = await supertest(app).post('/Gfinance').send({
                 query: `mutation{
                 signup(name:"t", email:"chaimaetoumy5@gmail.com", password: "a", role: "client") {
                         name
@@ -108,7 +108,7 @@ describe("test for register function", () => {
     })
     describe("when role not exist", () => {
         test('when role not exist', async () => {
-            const response = await supertest(app).post('/graphql').send({
+            const response = await supertest(app).post('/Gfinance').send({
                 query: `mutation{
                 signup(name:"kh", email:"khadija@gmail.com", password: "kh", role: "user") {
                         name
@@ -127,7 +127,7 @@ describe("test for register function", () => {
 describe("test for forgot password function", () => {
     describe("when email is missing", () => {
         test('when email is missing', async () => {
-            const response = await supertest(app).post('/graphql').send({
+            const response = await supertest(app).post('/Gfinance').send({
                 query: `mutation{
                 foregetPassword(email:"") {
                     email
@@ -139,7 +139,7 @@ describe("test for forgot password function", () => {
     })
     describe("when email is not exist", () => {
         test('when email is not exist', async () => {
-            const response = await supertest(app).post('/graphql').send({
+            const response = await supertest(app).post('/Gfinance').send({
                 query: `mutation{
                 foregetPassword(email:"khadijaa@gmail.com") {
                     email

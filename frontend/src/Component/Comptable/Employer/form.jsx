@@ -15,6 +15,7 @@ export default function Form() {
   function handleSubmit(e) {
     try {
       e.preventDefault();
+      console.log(Employer)
       AddEmployer({
         variables: {
           name: Employer.name,
@@ -64,11 +65,7 @@ export default function Form() {
           />
         </Box>
         <Box sx={{ display: "flex" }}>
-          <Body
-            nameInput="phoneNumber"
-            title="Phone"
-            EventOnChange={onchange}
-          />
+         
           <Body
             nameInput="adress"
             title="adress"
@@ -81,14 +78,14 @@ export default function Form() {
             EventOnChange={onchange}
             InputValue={Employer.service}
           />
-        </Box>
-        <Box sx={{ display: "flex" }}>
           <Body
             nameInput="fonction"
             title="fonction"
             EventOnChange={onchange}
             InputValue={Employer.fonction}
           />
+        </Box>
+        <Box sx={{ display: "flex" }}>
           <Body
             nameInput="siegeSocial"
             title="Siege Social"
@@ -100,17 +97,16 @@ export default function Form() {
             title="role"
             EventOnChange={onchange}
             InputValue={Employer.role}
-
           />
-        </Box>
-
-        <Box sx={{ display: "flex" }}>
           <Body
             nameInput="nCimr"
             title="CIMR"
             EventOnChange={onchange}
             InputValue={Employer.nCimr}
           />
+        </Box>
+
+        <Box sx={{ display: "flex" }}>
           <Body
             nameInput="nCnss"
             title="CNSS"
@@ -123,31 +119,37 @@ export default function Form() {
             EventOnChange={onchange}
             InputValue={Employer.matricule}
           />
-        </Box>
-        <Box sx={{ display: "flex" }}>
           <Body
             nameInput="situationFamiliale"
             title="Situation Familiale"
             EventOnChange={onchange}
             InputValue={Employer.situationFamiliale}
           />
-          <Body
-            nameInput="dateNaissance"
-            title="date Naissance"
-            type="date"
-            EventOnChange={onchange}
-            InputValue={Employer.dateNaissance}
-          />
-          <Body
-            nameInput="dataEmbauche"
-            EventOnChange={onchange}
-            InputValue={Employer.dataEmbauche}
-            type="date"
-          />
+        </Box>
+        <Box sx={{ display: "flex" }}>
+          <Box sx={{ display: "flex" }}>
+            <label>date de Naissance</label>
+            <Body
+              nameInput="dateNaissance"
+              type="date"
+              EventOnChange={onchange}
+              InputValue={Employer.dateNaissance}
+            />
+          </Box>
+
+          <Box sx={{ display: "flex" }}>
+            <label>date d'embauch</label>
+            <Body
+              nameInput="dataEmbauche"
+              EventOnChange={onchange}
+              InputValue={Employer.dataEmbauche}
+              type="date"
+            />
+          </Box>
         </Box>
 
         <Button type="submit" variant="outlined">
-          Outlined
+          SAVE
         </Button>
       </form>
     </>

@@ -15,6 +15,6 @@ module.exports = gql`
     ShowAllPrime: [Prime]
   }
   extend type Mutation {
-    UpdatePrime(id: ObjectID!): String
+    UpdatePrime(id: ObjectID!,taux:Int): Boolean
   }
 `;

@@ -1,6 +1,10 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function NavBar() {
+  function logOut() {
+    localStorage.clear();
+  }
   return (
     <div>
       <header className="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between p-3 border-bottom navba">
@@ -29,7 +33,7 @@ export default function NavBar() {
           </li>
           <li>
             <a href="#" className="nav-link px-2 text-light">
-              Features
+              Emplyer
             </a>
           </li>
           <li>
@@ -50,13 +54,17 @@ export default function NavBar() {
         </ul>
 
         <div className="col-md-3 text-end">
-        <button type="text" className="btn bg-transparent  text-light ">
-           OUMAIMA
+          <button type="text" className="btn bg-transparent  text-light ">
+            OUMAIMA
           </button>
-          <button type="button" className="btn  border border-light bg-transparent  text-light me-2">
-            Log out
-          </button>
-         
+          <Link to="/" onClick={logOut}>
+            <button
+              type="button"
+              className="btn  border border-light bg-transparent  text-light me-2"
+            >
+              Log out
+            </button>
+          </Link>
         </div>
       </header>
     </div>

@@ -4,6 +4,7 @@ import {
   Button,
   CssBaseline,
   TextField,
+  Link,
   Grid,
   Box,
   Container,
@@ -11,20 +12,18 @@ import {
   createTheme,
   ThemeProvider,
 } from "@mui/material";
-import { LOGIN } from "../../Api/Mutation/MutationAuth";
+import { FORGET_PASSWORD } from "../../Api/Mutation/MutationAuth";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import { useMutation,ApolloError } from "@apollo/client";
+import { useMutation, ApolloError } from "@apollo/client";
 import { useNavigate } from "react-router-dom";
-import { Link} from "react-router-dom";
 
 const theme = createTheme();
 
-export default function Login() {
-  const navigate = useNavigate();
-
-  const [login, {error }] = useMutation(LOGIN);
-  const [Input, setInput] = React.useState({ email: "", password: "" });
+export default function ForgetPassword() {
+  const [foregetPassword, { error }] = useMutation(FORGET_PASSWORD);
+  const [Input, setInput] = React.useState({ email: "" });
   const [errors, setError] = React.useState("");
+  const [verification, setVerification] = React.useState(false);
   const onchange = (event) => {
     setInput(() => ({
       ...Input,
@@ -35,18 +34,18 @@ export default function Login() {
   const handleSubmit = (event) => {
     try {
       event.preventDefault();
-  login({
+      foregetPassword({
         variables: {
           email: Input.email,
-          password: Input.password,
         },
-      }).then(res=>{
-        localStorage.setItem("token", res.data.login);
-        navigate('/salaire')
-      }).catch(error=>{
-        console.log(error)
-        setError(error)
       })
+        .then((res) => {
+          setVerification(res.data.foregetPassword);
+        })
+        .catch((error) => {
+          console.log(error);
+          setError(error);
+        });
     } catch (error) {
       setError(ApolloError);
     }
@@ -68,8 +67,11 @@ export default function Login() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Forget Password{" "}
           </Typography>
+          {verification && <>
+          <Box sx={{color:"red"}}>{verification}</Box>
+          </>}
           <form onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             {/* <Box>{errors && <p>{error}</p>}</Box> */}
             <TextField
@@ -83,17 +85,6 @@ export default function Login() {
               autoFocus
               onChange={onchange}
             />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-              onChange={onchange}
-            />
 
             <Button
               type="submit"
@@ -105,7 +96,7 @@ export default function Login() {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link to="/forget" >
+                <Link href="#" variant="body2">
                   Forgot password?
                 </Link>
               </Grid>

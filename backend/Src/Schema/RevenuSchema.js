@@ -4,8 +4,8 @@ module.exports = gql`
 
   type ImpotRevenu {
     _id: ObjectID
-    salaire_min:Float
-    salaire_max:Float
+    salaire_min: Float
+    salaire_max: Float
     somme_deduire: Float
     taux: Int
   }
@@ -14,6 +14,12 @@ module.exports = gql`
     ShowAllRevenu: [ImpotRevenu]
   }
   extend type Mutation {
-    ImpotRevenu(id: ObjectID!): String
+    updateImpotRevenu(
+      id: ObjectID!
+      salaire_min: Float
+      salaire_max: Float
+      somme_deduire: Float
+      taux: Int
+    ): Float
   }
 `;

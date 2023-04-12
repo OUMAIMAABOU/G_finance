@@ -10,3 +10,9 @@ export const VERIFIER_TOKEN = gql`
   verifierToken(token: $token)
 }
 `;
+
+export const FORGET_PASSWORD = gql`
+mutation foregetPassword($email: String!) {
+  foregetPassword(email: $email)
+}
+`;
